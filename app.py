@@ -270,11 +270,15 @@ def update_cart():
         cart_item.quantity += 1
     elif action == 'decrease' and cart_item.quantity > 1:
         cart_item.quantity -= 1
+    elif action == 'decrease':
+        return jsonify({"status": "error", "message": "Quantity cannot be less than 1"}), 400
 
     db.session.commit()
 
     # Recalculate total price
-    total = sum(item.quantity * item.menu_item.price for item in cart_item.cart_ref.items)
+    cart = cart_item.cart_ref
+    total = sum(item.quantity * item.menu_item.price for item in cart.items)
+
     return jsonify({"status": "success", "total": total})
 
 

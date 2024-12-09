@@ -298,15 +298,15 @@ footer {
             {% if cart_items %}
                 {% for item in cart_items %}
                 <li id="cart-item-{{ item.id }}" class="cart-item">
-                    <span>{{ item.name }} - ₹{{ item.price }}</span>
-                    <div>
+    <span>{{ item.name }} - ₹{{ item.price }}</span>
+    <div>
+        <button class="quantity-btn" onclick="changeQuantity({{ item.id }}, -1)">-</button>
+        <span id="quantity-{{ item.id }}">{{ item.quantity }}</span>
+        <button class="quantity-btn" onclick="changeQuantity({{ item.id }}, 1)">+</button>
+        <button class="remove-btn" onclick="removeItem({{ item.id }})">Remove</button>
+    </div>
+</li>
 
-                        <span id="quantity-{{ item.id }}">{{ item.quantity }}</span>
-
-
-                        <button class="remove-btn" onclick="removeItem({{ item.id }})">Remove</button>
-                    </div>
-                </li>
                 {% endfor %}
             {% else %}
                 <p>Your cart is empty.</p>
@@ -416,29 +416,39 @@ footer {
         </div>
     </footer>
     <script>
-  function updateQuantity(itemId, action) {
+function changeQuantity(itemId, change) {
+    // Determine action based on the change
+    const action = change === 1 ? 'increase' : 'decrease';
+
     fetch('/update-cart', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ item_id: itemId, action: action }),
     })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            const quantityElement = document.getElementById(`quantity-${itemId}`);
-            if (action === 'increase') {
-                quantityElement.innerText = parseInt(quantityElement.innerText) + 1;
-            } else if (action === 'decrease' && parseInt(quantityElement.innerText) > 1) {
-                quantityElement.innerText = parseInt(quantityElement.innerText) - 1;
-            }
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                // Update the quantity in the UI
+                const quantityElement = document.getElementById(`quantity-${itemId}`);
+                const newQuantity = parseInt(quantityElement.innerText) + change;
 
-            document.getElementById('total-price').innerText = data.total;
-        } else {
-            alert(data.message || 'Error updating the quantity.');
-        }
-    })
-    .catch(error => console.error('Error:', error));
+                if (newQuantity > 0) {
+                    quantityElement.innerText = newQuantity;
+                }
+
+                // Update the total price in the UI
+                document.getElementById('total-price').innerText = data.total.toFixed(2);
+            } else {
+                alert(data.message || 'Error updating the quantity.');
+            }
+        })
+        .catch(error => {
+            console.error('Error updating quantity:', error);
+            alert('An error occurred while updating the quantity. Please try again.');
+        });
 }
+
+
 
 function removeItem(itemId) {
     fetch('/remove-item', {
