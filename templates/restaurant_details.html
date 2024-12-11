@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ restaurant.name }} Menu</title>
     <link rel="stylesheet" href="/static/restaurant_details.css"> <!-- Add your custom CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
 
     </style>
@@ -60,7 +62,7 @@
         <p>Price: ₹{{ item.price }}</p>
     </div>
     <img src="{{ url_for('static', filename=item.img_url) }}" alt="{{ item.name }}">
-    <button class="add-to-cart" onclick="addToCart('{{ item.id }}')">Add to Cart</button>
+    <button class="add-to-cart" onclick="addToCart('{{ item.id }}')">Add</button>
 </div>
 
 

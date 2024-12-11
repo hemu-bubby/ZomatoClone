@@ -12,6 +12,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+/* Add hover effect for the card */
+.restaurant-card:hover {
+    transform: scale(1.05); /* Slight zoom */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Deeper shadow for hover */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+}
+
+/* Add subtle border effect */
+.restaurant-card {
+    border: 1px solid #f0f0f0;
+    background: linear-gradient(to bottom right, #ffffff, #f9f9f9); /* Subtle gradient background */
+    overflow: hidden;
+}
+
+/* Add hover effect to the image */
+.restaurant-card img {
+    transition: transform 0.3s ease; /* Smooth zoom on hover */
+}
+
+.restaurant-card:hover img {
+    transform: scale(1.1); /* Slight zoom for image */
+}
+</style>
 </head>
 
 <body>
@@ -26,9 +50,9 @@
     <form method="GET" action="/search">
         <div class="search-food">
             <input type="text" name="query" class="input-food" placeholder="Search for restaurant, cuisine or a dish" required>
-            <button type="submit">
-                <i class="fa-solid fa-magnifying-glass" style="color: #939393;"></i>
-            </button>
+            <button class="search-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         </div>
     </form>
 </div>
@@ -152,7 +176,7 @@
                                 <img src="static/images/jwm.png"
                                     alt="JW Marriott">
                             </div>
-                            <a href="#"><p>JW Marriott</p></a>
+                            <a href="/restaurant/6"><p>JW Marriott</p></a>
                         </div>
                     </div>
                 </section>
@@ -162,7 +186,7 @@
 <div id="restaurant-container" style="
     display: flex;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
     justify-content: center;
     padding: 15px;">
     {% for restaurant in restaurants %}
@@ -172,12 +196,13 @@
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    transition: transform 0.3s;
-    font-family: Arial, sans-serif;">
+    transition: transform 0.3s, box-shadow 0.3s;
+    font-family: Arial, sans-serif;
+    background-color: #fff;">
     <div style="position: relative;">
         <a href="{{ url_for('restaurant_details', restaurant_id=restaurant.id) }}" style="text-decoration: none; color: inherit;">
             <div style="height: 200px; overflow: hidden;">
-                <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                <img src="{{ restaurant.image_url }}" alt="{{ restaurant.name }}" style="width: 100%; height: 100%; object-fit: fill;">
             </div>
             <div style="position: absolute; top: 10px; left: 10px; background-color: rgba(255, 0, 0, 0.8); color: white; padding: 5px 10px; font-size: 12px; border-radius: 5px;">
                 <p>50% OFF up to ₹100</p>
@@ -198,7 +223,6 @@
     </a>
 </div>
 {% endfor %}
-
 </div>
 
 
