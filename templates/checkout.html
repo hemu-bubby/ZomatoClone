@@ -282,6 +282,30 @@ footer {
     line-height: 17px;
     margin-top: 23px;
 }
+        .back-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #007BFF;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.back-btn:hover {
+    transform: translateY(-5px);
+    background-color: #0056b3;
+}
+
+.back-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
     </style>
 </head>
 <body>
@@ -382,6 +406,11 @@ footer {
         </form>
         <div id="success-message">Your order is successful!</div>
     </div>
+     <section class="back-to-index-section" style="text-align: center; margin-top: 20px;">
+     <a href="/" class="back-btn">
+    <i class="fa fa-arrow-left"></i> Back
+</a>
+     </section>
 <footer>
         <div class="sec1">
             <section class="sec2">

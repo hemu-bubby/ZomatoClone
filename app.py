@@ -100,7 +100,9 @@ def logout():
     flash('You have logged out successfully.', 'success')
     return redirect(url_for('index'))
 
-
+@app.route('/aboutus')
+def aboutus():
+    return render_template('aboutus.html')
 
 
 # Restaurant Details Route

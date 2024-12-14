@@ -58,21 +58,26 @@
 </div>
 
 
-            <div class="user-login" style="display: flex; align-items: center; justify-content: space-around;">
+            <div class="user-login" style="display: flex; align-items: center; gap: 10px;">
     {% if 'email' in session %}
         <div class="user-profile" style="display: flex; align-items: center; gap: 10px;">
-            <i class="fa-solid fa-user" style="color: #007bff; font-size: 20px;"></i>
-            <span style="font-size: 16px; color: #333;">{{ session['email'] }}</span>
+            <div style="display: flex; align-items: center; background: linear-gradient(90deg, #f0f4ff, #e0eaff); padding: 10px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+    <i class="fa-solid fa-user" style="color: #007bff; font-size: 24px; margin-right: 12px;"></i>
+    <span style="font-size: 18px; color: #333; font-weight: 500;">{{ session['email'] }}</span>
+</div>
+
             <a href="{{ url_for('logout') }}" class="logout-btn"
-               style="background-color: #ff6f61; color: white; padding: 6px 12px; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; text-decoration: none; transition: background-color 0.3s ease; display: inline-block;">
+               style="background-color: #ff6f61; color: white; padding: 6px 15px; border-radius: 5px; font-size: 16px; font-weight: bold; cursor: pointer; text-decoration: none; transition: background-color 0.3s ease;">
                 Log out
             </a>
         </div>
-                {% else %}
-                    <a href="{{ url_for('login') }}">Log in</a>
-                    <a href="{{ url_for('signup') }}">Sign up</a>
-                {% endif %}
-            </div>
+    {% else %}
+        <a href="{{ url_for('login') }}" class="login-link">Log In</a>
+        <a href="{{ url_for('signup') }}" class="signup-link">Sign Up</a>
+    {% endif %}
+</div>
+
+
         </div>
     </header>
 {% if 'email' in session and session['email'] == 'hemanthbubby007@gmail.com' %}
@@ -117,66 +122,72 @@
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/2">
                             <div class="img-hero1">
                                 <img src="/static/images/nandhana.png"
-                                    alt="Nandhana"></a>
+                                    alt="Nandhana">
                             </div>
-                            <a href="/restaurant/2"><p>Nandhana Palace</p></a>
+                            <p>Nandhana Palace</p></a>
                         </div>
                     </div>
                 </section>
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/3">
                             <div class="img-hero1">
                                 <img src="/static/images/nandhini.jpg"
                                      alt="Nandhini">
                             </div>
-                            <a href="/restaurant/3"><p>Nandhini Dulex</p></a>
+                           <p>Nandhini Dulex</p></a>
                         </div>
                     </div>
                 </section>
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/4">
                             <div class="img-hero1">
                                 <img src="/static/images/nagarjuna.png"
                                      alt="Nagarjuna">
                             </div>
-                            <a href="/restaurant/4"><p>Nagarjuna</p></a>
+                            <p>Nagarjuna</p></a>
                         </div>
                     </div>
                 </section>
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/5">
                             <div class="img-hero1">
                                 <img src="/static/images/sharief bhai.jpg"
                                     alt="Sharief Bhai">
                             </div>
-                            <a href="/restaurant/5"><p>Sharief Bhai</p></a>
+                            <p>Sharief Bhai</p></a>
                         </div>
                     </div>
                 </section>
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/1">
                             <div class="img-hero1">
                                 <img src="/static/images/meghanas.png"
                                     alt="ITC">
                             </div>
-                            <a href="/restaurant/1"><p>Meghana's Food</p></a>
+                            <p>Meghana's Food</p></a>
                         </div>
                     </div>
                 </section>
                 <section class="heroFirst">
                     <div class="space">
                         <div class="main-con">
+                            <a href="/restaurant/6">
                             <div class="img-hero1">
                                 <img src="static/images/jwm.png"
                                     alt="JW Marriott">
                             </div>
-                            <a href="/restaurant/6"><p>JW Marriott</p></a>
+                            <p>JW Marriott</p></a>
                         </div>
                     </div>
                 </section>
@@ -223,6 +234,9 @@
     </a>
 </div>
 {% endfor %}
+    <a href="/cart" class="view-cart-btn" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background-color: #007BFF; color: white; text-decoration: none; border-radius: 5px;">
+            View Cart
+        </a>
 </div>
 
 
@@ -249,7 +263,7 @@
                 <div class="foot1">
                     <h6>ABOUT ZOMATO</h6>
                     <nav>
-                        <a href="#"><p>Who We Are</p></a>
+                        <a href="{{ url_for('aboutus') }}"><p>Who We Are</p></a>
                         <a href="#"><p>Blog</p></a>
                         <a href="#"><p>Work With Us</p></a>
                         <a href="#"><p>Investor Relations</p></a>
